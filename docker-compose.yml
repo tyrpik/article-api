@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  api:
+    # Build the Docker image using the Dockerfile in the current directory
+    build: .
+
+    # Map container port 8000 to host port 8000
+    ports:
+      - "8000:8000"
+
+    # Persist the SQLite database on the host machine
+    # This allows the database to survive container restarts
+    volumes:
+      - ./sql_app.db:/code/sql_app.db
+
+    # Define environment variables for the container
+    # In production, sensitive values should be provided
+    # via secure environment management or secret services
+    environment:
+      - SECRET_KEY=super-secret-key-for-docker-evaluation
